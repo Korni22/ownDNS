@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Selected registrar
+# 0 => iwantmyname
+# 1 => CloudFlare
 REGISTRAR="0"
 
 # Domain to be updated
