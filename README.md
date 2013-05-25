@@ -40,3 +40,6 @@ If you're not familiar with cronjobs, just run `crontab -e` from your command li
 ```crontab
 1 * * * * /path/to/owndns.sh --force
 ```
+
+## License
+This project is licensed under the MIT License, for more information see [LICENSE.txt](LICENSE.txt).
