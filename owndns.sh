@@ -3,15 +3,15 @@
 # Supported registrars
 # 0 => iwantmyname
 # 1 => CloudFlare
-REGISTRAR="1";
+REGISTRAR="0";
 
 # Domain to be updated
-DOMAIN="arne.me"
+DOMAIN=""
 
 # Authentification for registrar
-EMAIL="me@domain.com"
+EMAIL=""
 PASSWORD=""
-TOKEN="623874787b68d5c92ea9de2d442a4a6c"
+TOKEN=""
 REC_ID=""
 
 # The address where your public IP comes from
@@ -48,12 +48,14 @@ function update_ip() {
             0)
                 # iwantmyname
                 # We don't need to provide &myip because it will take the remote, if none is set
-                curl -s -u "$EMAIL:$PASSWORD" \
+                curl -s -o /dev/null \
+                  -u "$EMAIL:$PASSWORD" \
                   "https://iwantmyname.com/basicauth/ddns?hostname=$DOMAIN"
                 log ;;
             1)
                 # CloudFlare
-                curl -s "https://www.cloudflare.com/api_json.html" \
+                curl -s -o /dev/null \
+                  "https://www.cloudflare.com/api_json.html" \
                   -d "a=rec_edit" \
                   -d "tkn=$TOKEN" \
                   -d "id=$REC_ID" \
