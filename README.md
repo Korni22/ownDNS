@@ -2,10 +2,10 @@
 An alternative to Dyndns.
 
 # Installation
-Just fill in your data at `owndns.sh`, copy the script to any Unix-machine (even your router) and let it run at specific intervals (I'd recommend 1 min).
+Rename `config-template.sh` to `config.sh` and fill in your data. Then copy the scripts to any Unix-machine (even your router) and let it run at specific intervals (I'd recommend 1 min).
 
-## General Data
-Read specific data at your [registrar](#supported-registrars).
+## Config
+All configuration lies in `config.sh`. Read registrar-specific config at your [registrar](#supported-registrars).
 
 - `GET_IP_FROM`: The internet address to get your public IP from ([on the public ip](#on-the-public-ip))
 - `LOGFILE`: The name of the file where the ip changes will be logged
@@ -30,7 +30,7 @@ You could also make an [API call](http://www.cloudflare.com/docs/client-api.html
 - `DOMAIN`: The domain to update
 - `EMAIL`: The email address you've registered with at your registrar
 - `TOKEN`: The API token (get it [here](https://www.cloudflare.com/my-account))
-- `REC_ID`: The id of the a-record to update (more at [CloudFlare](#cloudflare))
+- `REC_ID`: The id of the a-record to update
 
 # On the public ip
 You have to get your public ip address and this is only possible via a remote webserver. When you trust me, just use `http://arne.me/owndns/ip`. But if you don't, you can copy the folder [server/ip](server/ip) to any PHP webserver and use it's address as `GET_IP_FROM`.

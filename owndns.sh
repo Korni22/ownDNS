@@ -1,27 +1,5 @@
 #!/bin/bash
 
-# Supported registrars
-# 0 => iwantmyname
-# 1 => CloudFlare
-REGISTRAR="0";
-
-# Domain to be updated
-DOMAIN=""
-
-# Authentification for registrar
-EMAIL=""
-PASSWORD=""
-TOKEN=""
-REC_ID=""
-
-# The address where your public IP comes from
-# Copy the public_ip.php from this folder to any webserver or just use mine
-GET_IP_FROM="http://arne.me/owndns/ip"
-
-# The file to log IPs to
-LOGFILE="owndns.log";
-
-
 # Logs date and IP
 function log() {
     # Log date and IP to logfile
@@ -41,9 +19,7 @@ function update_ip() {
 
     # Check if the IP is new
     if [ "$IP" != "$LAST_IP" ]; then
-        # We have a new IP!
-        # Let's update the registrar and log the IP
-
+        # We have a new ip address
         case $REGISTRAR in
             0)
                 # iwantmyname
@@ -71,20 +47,29 @@ function update_ip() {
                 echo "Registrar $REGISTRAR not supported!" ;;
         esac
     else
-        echo "Error: The IP address $IP is already set up."
+        echo "The IP address $IP is already set up."
     fi
 }
 
-# Check if --force or -f is appendet
-# If yes, update registrar, otherwise ask first
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    update_ip
-else
-    read -p "This may change the IP address for your domain. Are you sure? (y/n) " -n 1
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+# Load config
+if [ -e "config.sh" ]; then
+    # Include config.sh
+    source config.sh
+
+    # Check if --force or -f is appendet
+    # If yes, update registrar, otherwise ask first
+    if [ "$1" == "--force" -o "$1" == "-f" ]; then
         update_ip
+    else
+        read -p "This may change the IP address for your domain. Are you sure? (y/n) " -n 1
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            update_ip
+        fi
     fi
+else
+    echo "No config file found."
+    echo "Rename config-template.sh to config.sh and fill in your data."
 fi
 
 # Unset functions

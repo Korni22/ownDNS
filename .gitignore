@@ -3,6 +3,7 @@
 
 # OwnDNS
 owndns.log
+config.sh
 
 # Sublime Text 2
 *.sublime-project
