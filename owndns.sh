@@ -6,7 +6,7 @@ function log() {
     echo -e "$(date +%Y-%m-%d) $IP" >> "$LOGFILE"
 }
 
-# Updates IP at registrar
+# Updates ip at registrar
 function update_ip() {
     # Get current IP
     IP=$(curl -s -L $GET_IP_FROM)
@@ -61,7 +61,7 @@ if [ -e "config.sh" ]; then
     if [ "$1" == "--force" -o "$1" == "-f" ]; then
         update_ip
     else
-        read -p "This may change the IP address for your domain. Are you sure? (y/n) " -n 1
+        read -p "This may change the ip address for your domain. Are you sure? (y/n) " -n 1
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             update_ip
