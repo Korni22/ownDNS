@@ -2,7 +2,8 @@
 An open-source alternative to DynDNS.
 
 # Installation
-Rename `config-template.sh` to `config.sh` and fill in your data. Then copy the scripts to any Unix-machine (even your router) and let it run at specific intervals (I'd recommend 1 min).
+Rename `config-template.sh` to `config.sh` and fill in your data (or run `setup-config.sh`).
+Then copy the scripts to any Unix-machine (even your router) and let it run at specific intervals (I'd recommend 1 min).
 
 ## Config
 All configuration lies in `config.sh`. Read registrar-specific config at your [registrar](#supported-registrars).
