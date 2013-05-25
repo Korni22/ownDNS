@@ -19,7 +19,7 @@ This one's easy.
 - `REGISTRAR`: 0
 - `DOMAIN`: The domain to update
 - `EMAIL`: The email address you've registered with
-- `TOKEN`: Your password
+- `PASSWORD`: Your password
 
 ## CloudFlare
 CloudFlare only supports updating a record with it's id. Use the script at [server/cloudflare](server/cloudflare). This doesn't need to be on a webserver, you can also run it locally (e.g. via [MAMP](http://www.mamp.info/)).
@@ -39,5 +39,5 @@ You have to get your public ip address and this is only possible via a remote we
 # Cronjob
 If you're not familiar with cronjobs, just run `crontab -e` from your command line and add this line:
 ```crontab
-1 * * * * /path/to/owndns.sh
+1 * * * * /path/to/owndns.sh --force
 ```

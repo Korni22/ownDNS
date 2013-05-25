@@ -10,8 +10,9 @@ DOMAIN="arne.me"
 
 # Authentification for registrar
 EMAIL="me@domain.com"
-TOKEN="623874787b68d5c92ea9de2d442a4a6c" # Or password
-REC_ID="" # Just for CloudFlare: ID of the DNS record
+PASSWORD=""
+TOKEN="623874787b68d5c92ea9de2d442a4a6c"
+REC_ID=""
 
 # The address where your public IP comes from
 # Copy the public_ip.php from this folder to any webserver or just use mine
