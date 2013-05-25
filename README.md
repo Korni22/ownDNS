@@ -36,3 +36,8 @@ You could also make an [API call](http://www.cloudflare.com/docs/client-api.html
 # On the public ip
 You have to get your public ip address and this is only possible via a remote webserver. When you trust me, just use `http://arne.me/owndns/ip`. But if you don't, you can copy the folder [server/ip](server/ip) to any PHP webserver and use it's address as `GET_IP_FROM`.
 
+# Cronjob
+If you're not familiar with cronjobs, just run `crontab -e` from your command line and add this line:
+```crontab
+1 * * * * /path/to/owndns.sh
+```
