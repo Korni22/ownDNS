@@ -7,7 +7,6 @@ Just fill in your data at `owndns.sh`, copy the script to any Unix-machine (even
 ## General Data
 Read specific data at your [registrar](#supported-registrars).
 
-- `REGISTRAR`: The ID of the registrar (more at [supported registrars](#supported-registars))
 - `GET_IP_FROM`: The internet address to get your public IP from ([on the public ip](#on-the-public-ip))
 - `LOGFILE`: The name of the file where the ip changes will be logged
 

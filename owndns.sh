@@ -39,8 +39,6 @@ function update_ip() {
         LAST_IP=$(tail -1 $LOGFILE | cut -d' ' -f2)
     fi
 
-    LAST_IP=0 # for debugging
-
     # Check if the IP is new
     if [ "$IP" != "$LAST_IP" ]; then
         # We have a new IP!
