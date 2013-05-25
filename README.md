@@ -1,5 +1,5 @@
 # ownDNS
-An alternative to Dyndns.
+An open-source alternative to DynDNS.
 
 # Installation
 Rename `config-template.sh` to `config.sh` and fill in your data. Then copy the scripts to any Unix-machine (even your router) and let it run at specific intervals (I'd recommend 1 min).
