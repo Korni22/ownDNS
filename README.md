@@ -1,4 +1,4 @@
-# OwnDNS
+# ownDNS
 An alternative to Dyndns.
 
 # Installation
