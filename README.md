@@ -26,9 +26,11 @@ This one's easy.
 - `PASSWORD`: Your password
 
 ## CloudFlare
-CloudFlare only supports updating a record with it's id. Use the script at [server/cloudflare](server/cloudflare). This doesn't need to be on a webserver, you can also run it locally (e.g. via [MAMP](http://www.mamp.info/)).
+CloudFlare only supports updating a record with it's id. 
+To determine the ID of the record you want to use, you can either:
+- Use the script at [server/cloudflare](server/cloudflare). (This doesn't need to be on a webserver, you can also run it locally (e.g. via [MAMP](http://www.mamp.info/)).)
 
-You could also make an [API call](http://www.cloudflare.com/docs/client-api.html#s3.3) to manually find out the id.
+- You can also make an [API call](http://www.cloudflare.com/docs/client-api.html#s3.3) to manually find out the id.
 
 ### Data
 - `REGISTRAR`: 1
@@ -45,6 +47,18 @@ If you're not familiar with cronjobs, just run `crontab -e` from your command li
 ```crontab
 1 * * * * /path/to/owndns.sh --force
 ```
+
+#FAQ
+- Q: Dude, $REGISTRAR is not supported, what the f*ck?
+- A: Well, unfortunately, not every registrar has an [API](http://en.wikipedia.org/wiki/API) that we can use, so we would have to *manually* parse the web page, log in, change everything, etc. Even if we would do this (which is a humongous) amount of work, the slightest change on the web page will break the script.
+
+- Q: But, dude, my registrar *has* an [API](http://en.wikipedia.org/wiki/API)!
+- A: *Awesome*! Then just [open an issue](https://github.com/abahlo/owndns/issues/new) like this :
+    'FR: $YOURREGISTRAR'
+and please *do* link your registrar's API documentation :)
+
+- Q: But, dude, my question is not here!
+- A: No problem, *brah*, just contact me [via e-mail](http://scr.im/korni)
 
 ## License
 This project is licensed under the MIT License, for more information see [LICENSE.txt](LICENSE.txt).
