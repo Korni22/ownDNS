@@ -56,7 +56,7 @@ if [ -e "config.sh" ]; then
     # Include config.sh
     source config.sh
 
-    # Check if --force or -f is appendet
+    # Check if --force or -f is appended
     # If yes, update registrar, otherwise ask first
     if [ "$1" == "--force" -o "$1" == "-f" ]; then
         update_ip
