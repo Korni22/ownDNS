@@ -1,6 +1,10 @@
 # ownDNS
 An open-source alternative to DynDNS.
 
+This was originally created to be ran on a [Fritz!Box](http://en.wikipedia.org/wiki/FRITZ!Box), since the popular DynDNS
+providers like [DynDNS](http://dyn.com/dns/) and [No-IP](http://www.noip.com/) are becoming more and more difficult to
+use for free, but it *should* run on almost every router that is able to provide a shell.
+
 # Installation
 Rename `config-template.sh` to `config.sh` and fill in your data (or run `setup-config.sh`).
 Then copy the scripts to any Unix-machine (even your router) and let it run at specific intervals (I'd recommend 1 min).
