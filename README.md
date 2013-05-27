@@ -58,7 +58,7 @@ If you're not familiar with cronjobs, just run `crontab -e` from your command li
 and please *do* link your registrar's API documentation :)
 
 - Q: But, dude, my question is not here!
-- A: No problem, *brah*, just contact me [via e-mail](http://scr.im/korni)
+- A: No problem, *brah*, just contact me [via e-mail]hallo@arne.me)
 
 ## License
 This project is licensed under the MIT License, for more information see [LICENSE.txt](LICENSE.txt).
