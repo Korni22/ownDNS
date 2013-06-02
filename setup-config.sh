@@ -11,25 +11,26 @@ function write() {
     fi
 
     # Write to file
-    echo -e "#!/bin/bash\n" \
-      "\r# Selected registrar" \
-      "\r# 0 => iwantmyname" \
-      "\r# 1 => CloudFlare" \
-      "\rREGISTRAR=\"$REGISTRAR\"\n" \
-      "\r# Domain to be updated" \
-      "\rDOMAIN=\"$DOMAIN\"\n" \
-      "\r# Authentification for registrar" \
-      "\rEMAIL=\"$EMAIL\"" \
-      "\rPASSWORD=\"$PASSWORD\"" \
-      "\rTOKEN=\"$TOKEN\"" \
-      "\rREC_ID=\"$REC_ID\"\n" \
-      "\r# The address where your public IP comes from" \
-      "\rGET_IP_FROM=\"$GET_IP_FROM\"\n" \
-      "\r# The file to log ips to" \
-      "\rLOGFILE=\"$LOGFILE\"" \
+    echo -e "#!/bin/bash" \
+      "\n# Selected registrar" \
+      "\n# 0 => iwantmyname" \
+      "\n# 1 => CloudFlare" \
+      "\nREGISTRAR=\"$REGISTRAR\"" \
+      "\n# Domain to be updated" \
+      "\nDOMAIN=\"$DOMAIN\"" \
+      "\n# Authentification for registrar" \
+      "\nEMAIL=\"$EMAIL\"" \
+      "\nPASSWORD=\"$PASSWORD\"" \
+      "\nTOKEN=\"$TKN\"" \
+      "\nREC_ID=\"$REC_ID\"" \
+      "\n# The address where your public IP comes from" \
+      "\nGET_IP_FROM=\"$GET_IP_FROM\"" \
+      "\n# The file to log ips to" \
+      "\nLOGFILE=\"$LOGFILE\"" \
       >> config.sh
 
     echo -e "Created config.sh"
+    exit
 }
 
 function check() {
@@ -48,60 +49,113 @@ function check() {
 }
 
 function log() {
-    read -p "Logfile (leave empty for owndns.log): "
+    read -p "Logfile (defaults to owndns.log): "
     LOGFILE=$REPLY
     check
 }
 
 function public_ip() {
-    read -p "Get public ip from (leave empty for http://arne.me/owndns/ip/): "
+    read -p "Get public ip from (defaults to http://arne.me/owndns/ip/): "
     GET_IP_FROM=$REPLY
+
     log
 }
 
 function domain() {
     read -p "Domain: "
     DOMAIN=$REPLY
+
+    # Validate
+    if [[ ! $DOMAIN =~ ^[0-9a-zA-Z_\.-]+\.[a-zA-Z]{2,}$ ]]; then
+        read -p "This domain is not valid. Try again? (y/n) " -n 1
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            domain
+        fi
+    else
+        public_ip
+    fi
+
     public_ip
 }
 
 function userdata() {
-    # Read in userdata
     TKN=""
     PASSWORD=""
+    REC_ID=""
     case $REGISTRAR in
         0)
-            read -p "Email: "
-            EMAIL=$REPLY
             read -p "Password: "
             PASSWORD=$REPLY
-            domain ;;
+
+            # Validate
+            if [ -z "$PASSWORD" ]; then
+                read -p "Empty passwords are not allowed. Try again? (y/n) " -n 1
+                echo
+                if [[ $REPLY =~ ^[Yy]$ ]]; then
+                    userdata
+                fi
+            else
+              domain
+            fi
+            ;;
         1)
-            read -p "Email: "
-            EMAIL=$REPLY
             read -p "Token: "
             TKN=$REPLY
             read -p "Id of the record: "
             REC_ID=$REPLY
-            domain ;;
-        *)
-            echo "Registrar #$REGISTRAR is not an option"
+
+            # Validate
+            if [ -z "$TKN" -o -z "$REC_ID" ]; then
+                read -p "Empty token or record id. Try again? (y/n) " -n 1
+                echo
+                if [[ $REPLY =~ ^[Yy]$ ]]; then
+                    userdata
+                fi
+            else
+                domain
+            fi
             ;;
     esac
 }
 
+function email() {
+    read -p "Email: "
+    EMAIL=$REPLY
+
+    # Validate
+    if [[ ! $EMAIL =~ ^[0-9a-zA-Z_\.-]+@[0-9a-zA-Z_\.-]+\.[a-zA-Z]{2,}$ ]]; then
+        read -p "This email address is not valid. Try again? (y/n) " -n 1
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            email
+        fi
+    else
+        userdata
+    fi
+}
+
 function registrar() {
-    # Read in registrar
     echo "Choose one registrar"
     echo " 0 iwantmyname"
     echo " 1 CloudFlare"
     read -n 1
     REGISTRAR=$REPLY
     echo
-    userdata
+
+    if [[ ! $REGISTRAR  =~ ^[0-1]$ ]]; then
+        read -p "You need to choose a registrar between 0 and 1. Try again? (y/n) " -n 1
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            registrar
+        fi
+    else
+        email
+    fi
 }
 
-echo "This script will set up the config.sh for ownDNS"
+# Main
+echo "This script will set up the config.sh for ownDNS."
 registrar
 
 # Unset functions
@@ -111,4 +165,5 @@ unset log
 unset public_ip
 unset domain
 unset userdata
+unset email
 unset registrar

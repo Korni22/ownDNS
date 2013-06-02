@@ -6,7 +6,7 @@ providers like [DynDNS](http://dyn.com/dns/) and [No-IP](http://www.noip.com/) a
 use for free, but it *should* run on almost every router that is able to provide a shell.
 
 # Installation
-Rename `config-template.sh` to `config.sh` and fill in your data (or run `setup-config.sh`).
+Rename `config-template.sh` to `config.sh` and fill in your data (or run `bash setup-config.sh`).
 Then copy the scripts to any Unix-machine (even your router) and let it run at specific intervals (I'd recommend 1 min).
 
 ## Config
@@ -26,7 +26,7 @@ This one's easy.
 - `PASSWORD`: Your password
 
 ## CloudFlare
-CloudFlare only supports updating a record with it's id. 
+CloudFlare only supports updating a record with it's id.
 To determine the ID of the record you want to use, you can either:
 - Use the script at [server/cloudflare](server/cloudflare). (This doesn't need to be on a webserver, you can also run it locally (e.g. via [MAMP](http://www.mamp.info/)).)
 
