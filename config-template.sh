@@ -3,7 +3,7 @@
 # Selected registrar
 # 0 => iwantmyname
 # 1 => CloudFlare
-REGISTRAR="0"
+REGISTRAR=""
 
 # Domain to be updated
 DOMAIN=""
